@@ -1,14 +1,10 @@
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { Link } from 'react-router-native';
 
 import Text from './Text';
 import theme from '../theme';
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: theme.colors.textPrimary,
-    flexDirection: 'row',
-  },
   tab: {
     padding: theme.fontSizes.body,
   },
@@ -19,7 +15,7 @@ const styles = StyleSheet.create({
 
 const AppBarTab = () => {
   return (
-    <View style={styles.container}>
+    <>
       <Link to="/" style={styles.tab}>
         <Text fontWeight="bold" style={styles.text}>
           Repositories
@@ -30,7 +26,7 @@ const AppBarTab = () => {
           Sign in
         </Text>
       </Link>
-    </View>
+    </>
   );
 };
 
