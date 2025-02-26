@@ -1,10 +1,13 @@
-import { Pressable, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import { Link } from 'react-router-native';
+
 import Text from './Text';
 import theme from '../theme';
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: theme.colors.textPrimary,
+    flexDirection: 'row',
   },
   tab: {
     padding: theme.fontSizes.body,
@@ -17,11 +20,16 @@ const styles = StyleSheet.create({
 const AppBarTab = () => {
   return (
     <View style={styles.container}>
-      <Pressable style={styles.tab}>
+      <Link to="/" style={styles.tab}>
         <Text fontWeight="bold" style={styles.text}>
           Repositories
         </Text>
-      </Pressable>
+      </Link>
+      <Link to="/login" style={styles.tab}>
+        <Text fontWeight="bold" style={styles.text}>
+          Sign in
+        </Text>
+      </Link>
     </View>
   );
 };
