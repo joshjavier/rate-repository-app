@@ -48,7 +48,10 @@ const RepositoryItem = ({
   openInGitHub,
 }) => {
   return (
-    <View testID="repositoryItem" style={styles.container}>
+    <View
+      testID="repositoryItem"
+      style={[styles.container, url && { marginBottom: theme.fontSizes.body }]}
+    >
       <View style={styles.header}>
         <Avatar image={ownerAvatarUrl} />
         <View style={styles.headerText}>
