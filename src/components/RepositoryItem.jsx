@@ -37,7 +37,7 @@ const RepositoryItem = ({
   ownerAvatarUrl,
 }) => {
   return (
-    <View style={styles.container}>
+    <View testID="repositoryItem" style={styles.container}>
       <View style={styles.header}>
         <Avatar image={ownerAvatarUrl} />
         <View style={styles.headerText}>

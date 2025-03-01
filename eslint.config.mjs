@@ -2,6 +2,7 @@ import js from '@eslint/js';
 import react from 'eslint-plugin-react';
 import reactNative from 'eslint-plugin-react-native';
 import jest from 'eslint-plugin-jest';
+import testingLibrary from 'eslint-plugin-testing-library';
 import { fixupPluginRules } from '@eslint/compat';
 import babelParser from '@babel/eslint-parser';
 
@@ -43,5 +44,9 @@ export default [
   {
     files: ['./src/__tests__'],
     ...jest.configs['flat/recommended'],
+  },
+  {
+    files: ['./src/__tests__'],
+    ...testingLibrary.configs['flat/react'],
   },
 ];
