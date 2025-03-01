@@ -1,4 +1,4 @@
-import { StyleSheet, View } from 'react-native';
+import { Pressable, StyleSheet, View } from 'react-native';
 import theme from '../theme';
 import Text from './Text';
 import Avatar from './Avatar';
@@ -24,6 +24,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
   },
+  button: {
+    backgroundColor: theme.colors.primary,
+    borderRadius: 4,
+    padding: theme.fontSizes.body,
+  },
+  buttonText: {
+    color: '#fff',
+    textAlign: 'center',
+  },
 });
 
 const RepositoryItem = ({
@@ -35,6 +44,8 @@ const RepositoryItem = ({
   reviewCount,
   ratingAverage,
   ownerAvatarUrl,
+  url,
+  openInGitHub,
 }) => {
   return (
     <View testID="repositoryItem" style={styles.container}>
@@ -52,6 +63,13 @@ const RepositoryItem = ({
         <Stat value={reviewCount} label="Reviews" />
         <Stat value={ratingAverage} label="Rating" />
       </View>
+      {url && (
+        <Pressable style={styles.button} onPress={() => openInGitHub(url)}>
+          <Text fontWeight="bold" style={styles.buttonText}>
+            Open in GitHub
+          </Text>
+        </Pressable>
+      )}
     </View>
   );
 };
