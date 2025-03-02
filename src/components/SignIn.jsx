@@ -13,6 +13,9 @@ const styles = StyleSheet.create({
     padding: theme.fontSizes.body,
     gap: theme.fontSizes.body,
   },
+  field: {
+    gap: 4,
+  },
   input: {
     borderColor: theme.colors.textSecondary,
     borderWidth: 1,
@@ -48,27 +51,31 @@ export const SignInContainer = ({ onSubmit }) => {
 
   return (
     <View style={styles.container}>
-      <TextInput
-        placeholder="Username"
-        value={values.username}
-        onChangeText={handleChange('username')}
-        style={[
-          styles.input,
-          touched.username && errors.username && { borderColor: theme.colors.error },
-        ]}
-      />
-      {touched.username && errors.username && <Text color="error">{errors.username}</Text>}
-      <TextInput
-        placeholder="Password"
-        secureTextEntry
-        value={values.password}
-        onChangeText={handleChange('password')}
-        style={[
-          styles.input,
-          touched.password && errors.password && { borderColor: theme.colors.error },
-        ]}
-      />
-      {touched.password && errors.password && <Text color="error">{errors.password}</Text>}
+      <View style={styles.field}>
+        <TextInput
+          placeholder="Username"
+          value={values.username}
+          onChangeText={handleChange('username')}
+          style={[
+            styles.input,
+            touched.username && errors.username && { borderColor: theme.colors.error },
+          ]}
+        />
+        {touched.username && errors.username && <Text color="error">{errors.username}</Text>}
+      </View>
+      <View style={styles.field}>
+        <TextInput
+          placeholder="Password"
+          secureTextEntry
+          value={values.password}
+          onChangeText={handleChange('password')}
+          style={[
+            styles.input,
+            touched.password && errors.password && { borderColor: theme.colors.error },
+          ]}
+        />
+        {touched.password && errors.password && <Text color="error">{errors.password}</Text>}
+      </View>
       <Pressable onPress={handleSubmit} style={styles.button}>
         <Text fontWeight="bold" style={styles.buttonText}>
           Sign in

@@ -34,11 +34,18 @@ const AppBarTab = () => {
           </Text>
         </Link>
       ) : (
-        <Pressable onPress={() => signout()} style={styles.tab}>
-          <Text fontWeight="bold" style={styles.text}>
-            Sign out
-          </Text>
-        </Pressable>
+        <>
+          <Link to="/new" style={styles.tab}>
+            <Text fontWeight="bold" style={styles.text}>
+              Create a review
+            </Text>
+          </Link>
+          <Pressable onPress={() => signout()} style={styles.tab}>
+            <Text fontWeight="bold" style={styles.text}>
+              Sign out
+            </Text>
+          </Pressable>
+        </>
       )}
     </>
   );
