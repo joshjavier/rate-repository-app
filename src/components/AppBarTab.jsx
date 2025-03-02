@@ -28,11 +28,18 @@ const AppBarTab = () => {
         </Text>
       </Link>
       {!user ? (
-        <Link to="/login" style={styles.tab}>
-          <Text fontWeight="bold" style={styles.text}>
-            Sign in
-          </Text>
-        </Link>
+        <>
+          <Link to="/login" style={styles.tab}>
+            <Text fontWeight="bold" style={styles.text}>
+              Sign in
+            </Text>
+          </Link>
+          <Link to="/register" style={styles.tab}>
+            <Text fontWeight="bold" style={styles.text}>
+              Sign up
+            </Text>
+          </Link>
+        </>
       ) : (
         <>
           <Link to="/new" style={styles.tab}>
