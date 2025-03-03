@@ -5,19 +5,37 @@ import useRepositories from '../hooks/useRepositories';
 import RepositoryItem from './RepositoryItem';
 import ItemSeparator from './ItemSeparator';
 import SortPicker from './SortPicker';
+import RepositorySearch from './RepositorySearch';
+import { useDebounce } from 'use-debounce';
+
+const RepositoryListHeader = ({ selectedSort, setSelectedSort, searchQuery, setSearchQuery }) => {
+  return (
+    <>
+      <RepositorySearch searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+      <SortPicker selectedSort={selectedSort} setSelectedSort={setSelectedSort} />
+    </>
+  );
+};
 
 export const RepositoryListContainer = ({
   repositories,
   goToRepo,
   selectedSort,
   setSelectedSort,
+  searchQuery,
+  setSearchQuery,
 }) => {
   return (
     <FlatList
       data={repositories}
       ItemSeparatorComponent={ItemSeparator}
       ListHeaderComponent={
-        <SortPicker selectedSort={selectedSort} setSelectedSort={setSelectedSort} />
+        <RepositoryListHeader
+          selectedSort={selectedSort}
+          setSelectedSort={setSelectedSort}
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+        />
       }
       renderItem={({ item: { id, ...item } }) => (
         <Pressable onPress={goToRepo(id)}>
@@ -29,8 +47,10 @@ export const RepositoryListContainer = ({
 };
 
 const RepositoryList = () => {
+  const [searchQuery, setSearchQuery] = useState('');
   const [selectedSort, setSelectedSort] = useState('latest');
-  const { repositories } = useRepositories(selectedSort);
+  const [searchKeyword] = useDebounce(searchQuery, 500);
+  const { repositories } = useRepositories({ sort: selectedSort, searchKeyword });
   const navigate = useNavigate();
 
   const goToRepo = (id) => () => {
@@ -43,6 +63,8 @@ const RepositoryList = () => {
       goToRepo={goToRepo}
       selectedSort={selectedSort}
       setSelectedSort={setSelectedSort}
+      searchQuery={searchQuery}
+      setSearchQuery={setSearchQuery}
     />
   );
 };
