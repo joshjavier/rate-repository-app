@@ -1,5 +1,5 @@
 import { Pressable, StyleSheet } from 'react-native';
-import { Link } from 'react-router-native';
+import { Link, useNavigate } from 'react-router-native';
 
 import Text from './Text';
 import theme from '../theme';
@@ -18,7 +18,12 @@ const styles = StyleSheet.create({
 const AppBarTab = () => {
   const { user } = useAuthenticatedUser();
   const signout = useSignOut();
-  console.log(user);
+  const navigate = useNavigate();
+
+  const onSignOut = () => {
+    signout();
+    navigate('/');
+  };
 
   return (
     <>
@@ -47,7 +52,12 @@ const AppBarTab = () => {
               Create a review
             </Text>
           </Link>
-          <Pressable onPress={() => signout()} style={styles.tab}>
+          <Link to="/myreviews" style={styles.tab}>
+            <Text fontWeight="bold" style={styles.text}>
+              My reviews
+            </Text>
+          </Link>
+          <Pressable onPress={onSignOut} style={styles.tab}>
             <Text fontWeight="bold" style={styles.text}>
               Sign out
             </Text>

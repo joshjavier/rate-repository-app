@@ -77,10 +77,23 @@ export const GET_REPOSITORY_WITH_REVIEWS = gql`
 `;
 
 export const GET_AUTHENTICATED_USER = gql`
-  query GetAuthenticatedUser {
+  query GetAuthenticatedUser($withReviews: Boolean = false) {
     me {
       id
       username
+      reviews @include(if: $withReviews) {
+        edges {
+          node {
+            id
+            text
+            rating
+            createdAt
+            repository {
+              fullName
+            }
+          }
+        }
+      }
     }
   }
 `;

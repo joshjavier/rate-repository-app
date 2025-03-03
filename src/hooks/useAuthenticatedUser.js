@@ -1,12 +1,21 @@
 import { useQuery } from '@apollo/client';
 import { GET_AUTHENTICATED_USER } from '../graphql/queries';
 
-const useAuthenticatedUser = () => {
+const useAuthenticatedUser = ({ withReviews = false } = {}) => {
   const { data, loading, error } = useQuery(GET_AUTHENTICATED_USER, {
     fetchPolicy: 'cache-and-network',
+    variables: { withReviews },
   });
 
-  return { user: data?.me, loading, error };
+  let user, reviews;
+  if (data?.me) {
+    ({ reviews, ...user } = data.me);
+  }
+  if (reviews) {
+    reviews = reviews.edges.map((e) => e.node);
+  }
+
+  return { user, reviews, loading, error };
 };
 
 export default useAuthenticatedUser;

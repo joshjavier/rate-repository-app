@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
 });
 
 const ReviewItem = ({ review }) => {
-  const { text, rating, createdAt, user } = review;
+  const { text, rating, createdAt, user, repository } = review;
 
   return (
     <View style={styles.container}>
@@ -40,7 +40,7 @@ const ReviewItem = ({ review }) => {
         </Text>
       </View>
       <View style={styles.text}>
-        <Text fontWeight="bold">{user.username}</Text>
+        <Text fontWeight="bold">{user?.username ?? repository?.fullName}</Text>
         <Text style={styles.date}>
           {new Intl.DateTimeFormat('de-DE', { dateStyle: 'medium' }).format(new Date(createdAt))}
         </Text>
