@@ -1,0 +1,28 @@
+meta {
+  name: Delete a review
+  type: graphql
+  seq: 12
+}
+
+post {
+  url: {{host}}/graphql
+  body: graphql
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{accessToken}}
+}
+
+body:graphql {
+  mutation DeleteReview($id: ID!) {
+    deleteReview(id: $id)
+  }
+  
+}
+
+body:graphql:vars {
+  {
+    "id": "bbe42984-051b-4a01-b45d-b8d29c32200c.joshjavier.site"
+  }
+}

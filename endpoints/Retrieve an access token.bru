@@ -1,0 +1,31 @@
+meta {
+  name: Retrieve an access token
+  type: graphql
+  seq: 2
+}
+
+post {
+  url: {{host}}/graphql
+  body: graphql
+  auth: none
+}
+
+body:graphql {
+  mutation SignIn($username: String!, $password: String!) {
+    authenticate(credentials: { username: $username, password: $password }) {
+      accessToken
+    }
+  }
+  
+}
+
+body:graphql:vars {
+  {
+    "username": "kalle",
+    "password": "password"
+  }
+}
+
+vars:post-response {
+  accessToken: res.body.data.authenticate.accessToken
+}

@@ -1,0 +1,23 @@
+meta {
+  name: List all registered users
+  type: graphql
+  seq: 1
+}
+
+post {
+  url: {{host}}/graphql
+  body: graphql
+  auth: none
+}
+
+body:graphql {
+  query {
+    users {
+      edges {
+        node {
+          username
+        }
+      }
+    }
+  }
+}

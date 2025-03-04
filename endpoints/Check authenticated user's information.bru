@@ -1,0 +1,29 @@
+meta {
+  name: Check authenticated user's information
+  type: graphql
+  seq: 5
+}
+
+post {
+  url: {{host}}/graphql
+  body: graphql
+  auth: bearer
+}
+
+headers {
+  : 
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJiYmU0Mjk4NC0wNTFiLTRhMDEtYjQ1ZC1iOGQyOWMzMjIwMGMiLCJpYXQiOjE3NDA3ODQ2MTIsImV4cCI6MjM0NTU4NDYxMiwic3ViIjoiYWNjZXNzVG9rZW4ifQ.B_h7HZgqIDXf4mMftxJLEgg5NVb7QV5w6BrVJ3Ee5oc
+}
+
+body:graphql {
+  query GetAuthenticatedUser {
+    me {
+      id
+      username
+    }
+  }
+  
+}

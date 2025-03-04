@@ -1,0 +1,39 @@
+meta {
+  name: Get sorted repositories
+  type: graphql
+  seq: 9
+}
+
+post {
+  url: {{host}}/graphql
+  body: graphql
+  auth: none
+}
+
+body:graphql {
+  query GetRepositories($orderDirection: OrderDirection, $orderBy: AllRepositoriesOrderBy) {
+    repositories(orderDirection: $orderDirection, orderBy: $orderBy) {
+      edges {
+        node {
+          id
+          fullName
+          description
+          language
+          stargazersCount
+          forksCount
+          reviewCount
+          ratingAverage
+          ownerAvatarUrl
+        }
+      }
+    }
+  }
+  
+}
+
+body:graphql:vars {
+  {
+    "orderDirection": "DESC",
+    "orderBy": "RATING_AVERAGE"
+  }
+}

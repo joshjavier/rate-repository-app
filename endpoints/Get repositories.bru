@@ -1,0 +1,32 @@
+meta {
+  name: Get repositories
+  type: graphql
+  seq: 4
+}
+
+post {
+  url: {{host}}/graphql
+  body: graphql
+  auth: none
+}
+
+body:graphql {
+  query GetRepositories {
+    repositories {
+      edges {
+        node {
+          id
+          fullName
+          description
+          language
+          stargazersCount
+          forksCount
+          reviewCount
+          ratingAverage
+          ownerAvatarUrl
+        }
+      }
+    }
+  }
+  
+}

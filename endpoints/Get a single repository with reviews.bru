@@ -1,0 +1,49 @@
+meta {
+  name: Get a single repository with reviews
+  type: graphql
+  seq: 7
+}
+
+post {
+  url: {{host}}/graphql
+  body: graphql
+  auth: none
+}
+
+body:graphql {
+  query GetRepository($id: ID!) {
+    repository(id: $id) {
+      id
+      fullName
+      description
+      language
+      stargazersCount
+      forksCount
+      reviewCount
+      ratingAverage
+      ownerAvatarUrl
+      url
+      reviews {
+        edges {
+          node {
+            id
+            text
+            rating
+            createdAt
+            user {
+              id
+              username
+            }
+          }
+        }
+      }
+    }
+  }
+  
+}
+
+body:graphql:vars {
+  {
+    "id": "jaredpalmer.formik"
+  }
+}

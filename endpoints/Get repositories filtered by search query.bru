@@ -1,0 +1,38 @@
+meta {
+  name: Get repositories filtered by search query
+  type: graphql
+  seq: 10
+}
+
+post {
+  url: {{host}}/graphql
+  body: graphql
+  auth: none
+}
+
+body:graphql {
+  query GetRepositories($searchKeyword: String) {
+    repositories(searchKeyword: $searchKeyword) {
+      edges {
+        node {
+          id
+          fullName
+          description
+          language
+          stargazersCount
+          forksCount
+          reviewCount
+          ratingAverage
+          ownerAvatarUrl
+        }
+      }
+    }
+  }
+  
+}
+
+body:graphql:vars {
+  {
+    "searchKeyword": "ze"
+  }
+}

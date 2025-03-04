@@ -1,0 +1,40 @@
+meta {
+  name: Get repositories with cursor-based pagination
+  type: graphql
+  seq: 13
+}
+
+post {
+  url: {{host}}/graphql
+  body: graphql
+  auth: none
+}
+
+body:graphql {
+  query GetRepositoriesPaginated($first: Int, $cursor: String) {
+    repositories(first: $first, after: $cursor) {
+      totalCount
+      edges {
+        node {
+          id
+          fullName
+          createdAt
+        }
+        cursor
+      }
+      pageInfo {
+        endCursor
+        startCursor
+        hasNextPage
+      }
+    }
+  }
+  
+}
+
+body:graphql:vars {
+  {
+    "first": 2,
+    "cursor": "WzE3NDA4ODIwNTQ0NjQsImpvc2hqYXZpZXIuZ2FtZS10aWxlLWFzc2lzdGFudCJd"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "version": "1",
+  "name": "rate-repository",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ],
+  "size": 0,
+  "filesCount": 0,
+  "presets": {
+    "requestType": "graphql",
+    "requestUrl": "{{host}}/graphql"
+  }
+}

@@ -1,0 +1,35 @@
+meta {
+  name: Get a single repository
+  type: graphql
+  seq: 6
+}
+
+post {
+  url: {{host}}/graphql
+  body: graphql
+  auth: none
+}
+
+body:graphql {
+  query GetRepository($id: ID!) {
+    repository(id: $id) {
+      id
+      fullName
+      description
+      language
+      stargazersCount
+      forksCount
+      reviewCount
+      ratingAverage
+      ownerAvatarUrl
+      url
+    }
+  }
+  
+}
+
+body:graphql:vars {
+  {
+    "id": "jaredpalmer.formik"
+  }
+}
