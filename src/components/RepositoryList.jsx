@@ -24,6 +24,7 @@ export const RepositoryListContainer = ({
   setSelectedSort,
   searchQuery,
   setSearchQuery,
+  onEndReached,
 }) => {
   return (
     <FlatList
@@ -42,6 +43,8 @@ export const RepositoryListContainer = ({
           <RepositoryItem key={id} {...item} />
         </Pressable>
       )}
+      onEndReached={onEndReached}
+      onEndReachedThreshold={0.5}
     />
   );
 };
@@ -50,11 +53,19 @@ const RepositoryList = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedSort, setSelectedSort] = useState('latest');
   const [searchKeyword] = useDebounce(searchQuery, 500);
-  const { repositories } = useRepositories({ sort: selectedSort, searchKeyword });
+  const { repositories, fetchMore } = useRepositories({
+    sort: selectedSort,
+    searchKeyword,
+    first: 8,
+  });
   const navigate = useNavigate();
 
   const goToRepo = (id) => () => {
     navigate(`/repository/${id}`);
+  };
+
+  const onEndReached = () => {
+    fetchMore();
   };
 
   return (
@@ -65,6 +76,7 @@ const RepositoryList = () => {
       setSelectedSort={setSelectedSort}
       searchQuery={searchQuery}
       setSearchQuery={setSearchQuery}
+      onEndReached={onEndReached}
     />
   );
 };
