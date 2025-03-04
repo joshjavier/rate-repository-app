@@ -16,7 +16,11 @@ const RepositoryInfo = ({ repository }) => {
 
 const SingleRepository = () => {
   const params = useParams();
-  const { repository, reviews } = useRepository(params.id);
+  const { repository, reviews, fetchMore } = useRepository(params.id);
+
+  const onEndReached = () => {
+    fetchMore();
+  };
 
   return (
     <FlatList
@@ -25,6 +29,7 @@ const SingleRepository = () => {
       keyExtractor={({ id }) => id}
       ListHeaderComponent={() => <RepositoryInfo repository={repository} />}
       ItemSeparatorComponent={ItemSeparator}
+      onEndReached={onEndReached}
     />
   );
 };

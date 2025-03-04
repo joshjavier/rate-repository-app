@@ -56,7 +56,7 @@ export const GET_REPOSITORY = gql`
 `;
 
 export const GET_REPOSITORY_WITH_REVIEWS = gql`
-  query GetRepository($id: ID!) {
+  query GetRepository($id: ID!, $first: Int, $after: String) {
     repository(id: $id) {
       id
       fullName
@@ -68,8 +68,9 @@ export const GET_REPOSITORY_WITH_REVIEWS = gql`
       ratingAverage
       ownerAvatarUrl
       url
-      reviews {
+      reviews(first: $first, after: $after) {
         edges {
+          cursor
           node {
             id
             text
@@ -80,6 +81,11 @@ export const GET_REPOSITORY_WITH_REVIEWS = gql`
               username
             }
           }
+        }
+        pageInfo {
+          endCursor
+          startCursor
+          hasNextPage
         }
       }
     }
